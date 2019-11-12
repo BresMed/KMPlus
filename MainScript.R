@@ -78,9 +78,17 @@ EXTRAPS <- list(
   extrapolations2
 )
 
-ggplot(EXTRAPS[[1]],aes(x = time, y = exponential)) + geom_line()
+ggplot(EXTRAPS[[1]],aes(x = time, y = exponential)) + 
+  geom_line() +
+  geom_line(data = EXTRAPS[[1]], colour = 2,linetype = 2,aes(x = time, y = weibull)) +
+  geom_line(data = EXTRAPS[[1]], colour = 3,linetype = 3,aes(x = time, y = log_logistic)) +
+  geom_line(data = EXTRAPS[[1]], colour = 4,linetype = 4,aes(x = time, y = log_normal)) +
+  geom_line(data = EXTRAPS[[1]], colour = 5,linetype = 5,aes(x = time, y = gompertz)) +
+  geom_line(data = EXTRAPS[[1]], colour = 6,linetype = 6,aes(x = time, y = gen_gamma))
 
 plot(sfit)
 
 
 # KM to a certain point and then an exponential line
+
+# generate KM plot
