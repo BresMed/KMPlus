@@ -14,6 +14,13 @@ t_var <- "time"
 e_var <- "status"
 S_var <- "sex"
 
+
+# dat <- ovarian
+# t_var <- "futime"
+# e_var <- "fustat"
+# S_var <- "ecog.ps"
+
+
 t <- dat[,t_var]
 e <- dat[,e_var]
 S <- dat[,S_var]
@@ -243,12 +250,12 @@ plots_rebaselined <- lapply(1:S_len, function(STRATA) {
 
 KM <- lapply(1:S_len, function(STRATA) {
   
-  DF <- dat %>% dplyr::filter(sex == S_uniq[STRATA])
+  DF <- dat[which(dat[,S_var] == S_uniq[STRATA]),]
   
   KM <- MakeKMPlotData(
     DATA     = DF,
-    timevar  = "time",
-    eventvar = "status"
+    timevar  = t_var,
+    eventvar = e_var
   )
   KM_cutoff <- KM %>% filter(t <= Tcutoff)
   
@@ -340,7 +347,6 @@ plots_KMPlus <- lapply(1:S_len, function(STRATA) {
   return(p)
   
 })
-
 
 plotlist <- c(plots_orig, plots_rebaselined,plots_KMPlus)
 do.call("grid.arrange", c(plotlist,ncol=S_len,nrow=3))
