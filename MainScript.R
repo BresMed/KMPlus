@@ -26,7 +26,7 @@ S_uniq <- unique(dat[, S_var])
 S_len <- length(S_uniq)
 
 time_steps <- seq(0,2000,1)
-Tcutoff <- 500
+Tcutoff <- 200
 
 dists     <- c("exponential","weibull","llogis",      "lnorm",     "gompertz","gengamma")
 
@@ -115,13 +115,13 @@ extraps_KMplusMod <- lapply(1:S_len, function(STRATA){
   
   # make a data.frame with KM+extrapolation for each extrapolation
   data.frame(
-    time = c(KM_cutoff$t, extraps_KMplus[[STRATA]]$time + rbtime),
-    exponential = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$exponential * rbsurv),
-    weibull = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$weibull * rbsurv),
+    time         = c(KM_cutoff$t  , extraps_KMplus[[STRATA]]$time + rbtime),
+    exponential  = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$exponential * rbsurv),
+    weibull      = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$weibull * rbsurv),
     log_logistic = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$log_logistic * rbsurv),
-    log_normal = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$log_normal * rbsurv),
-    gompertz = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$gompertz * rbsurv),
-    gen_gamma = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$gen_gamma * rbsurv)
+    log_normal   = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$log_normal * rbsurv),
+    gompertz     = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$gompertz * rbsurv),
+    gen_gamma    = c(KM_cutoff$s_t, extraps_KMplus[[STRATA]]$gen_gamma * rbsurv)
   )
 })
 

@@ -180,8 +180,8 @@ MakeKMPlotData <- function(DATA, timevar, eventvar) {
   z <- survfit(y ~ 1)
   
   #make adjustments to data required for graph (i.e. double both datasets)
-  t   <- bind_rows(data.frame(t   = z$time), data.frame(t   = z$time) , .id = "t")[,2]
-  s_t <- bind_rows(data.frame(s_t = z$surv), data.frame(s_t = z$surv) , .id = "s_t")[,2]
+  t   <- rep(z$time,2)
+  s_t <- rep(z$surv,2)
   
   #sort parameters as required (by time ascending, by survival descending), adding extra data points
   t   <- append(0,t[order(t)])
